@@ -9,8 +9,7 @@ function App() {
       <Navbar />
       <ItemListContainer
         title="Lista de Calibres"
-        containerClass="contenedorcalibres"
-        titleClass="listadocalibres"
+        titleClass="titulo"
       />
     </div>
   );

@@ -2,10 +2,7 @@
   text-align: center;
 }
 
-.item-list-container {
-  margin-top: 20px;
-}
-
-.listadocalibres {
+.titulo {
   text-decoration: underline;
+  color: #333;
 }
