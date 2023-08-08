@@ -8,7 +8,7 @@ function App() {
     <div className="App">
       <Navbar />
       <ItemListContainer
-        title="Lista de Calibres"
+        title="Listado de Calibres"
         titleClass="titulo"
       />
     </div>
