@@ -1,0 +1,58 @@
+[
+   {
+      "id": 1,
+      "nombre": "Cartucho 9mm",
+      "precio": 0.5,
+      "imagen": "9mm.jpg",
+      "categoria": "Munición",
+      "descripcion": "Cartucho de calibre 9mm para pistolas y subfusiles."
+   },
+   {
+      "id": 2,
+      "nombre": "Cartucho 5.56mm",
+      "precio": 0.3,
+      "imagen": "5.56mm.jpg",
+      "categoria": "Munición",
+      "descripcion": "Cartucho de calibre 5.56mm utilizado en rifles de asalto y armas similares."
+   },
+   {
+      "id": 3,
+      "nombre": "Cartucho 7.62mm",
+      "precio": 0.4,
+      "imagen": "7.62mm.jpg",
+      "categoria": "Munición",
+      "descripcion": "Cartucho de calibre 7.62mm comúnmente usado en rifles de combate."
+   },
+   {
+      "id": 4,
+      "nombre": "Cartucho 45 ACP",
+      "precio": 0.6,
+      "imagen": "45acp.jpg",
+      "categoria": "Munición",
+      "descripcion": "Cartucho de calibre .45 ACP ampliamente utilizado en pistolas semiautomáticas."
+   },
+   {
+      "id": 5,
+      "nombre": "Cartucho 12 Gauge",
+      "precio": 1.2,
+      "imagen": "12gauge.jpg",
+      "categoria": "Munición",
+      "descripcion": "Cartucho de escopeta de calibre 12 utilizado para caza y tiro deportivo."
+   },
+   {
+      "id": 6,
+      "nombre": "Cartucho 30-06",
+      "precio": 1,
+      "imagen": "30-06.jpg",
+      "categoria": "Munición",
+      "descripcion": "Cartucho de calibre 30-06 ampliamente utilizado en rifles de caza mayor."
+   },
+   {
+      "id": 7,
+      "nombre": "Cartucho 308 Winchester",
+      "precio": 1.1,
+      "imagen": "308winchester.jpg",
+      "categoria": "Munición",
+      "descripcion": "Cartucho de calibre .308 Winchester utilizado en rifles de caza y tiro deportivo."
+   }
+]

@@ -1,27 +1,40 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './ItemListContainer.css';
+import Card from './Card';
 
 const ItemListContainer = ({ title, containerClass, titleClass }) => {
-    const calibers = [
-        '9mm',
-        '5.56mm',
-        '7.62mm',
-        '45 ACP',
-        '12 Gauge',
-        '30-06',
-        '308 Winchester',
-    ];
+    const [items, setItems] = useState([]);
+
+    const getProducts = async () => {
+        try {
+            const response = await fetch('/data/products.json');
+            const products = await response.json();
+            setItems(products);
+        } catch (error) {
+            console.error('Error fetching products:', error);
+        }
+    };
+
+    useEffect(() => {
+        getProducts();
+    }, []);
 
     return (
         <div className={`item-list-container ${containerClass}`}>
             <h2 className={`item-list-title ${titleClass}`}>{title}</h2>
-            <ul className="caliber-list">
-                {calibers.map((caliber, index) => (
-                    <li key={index}>{caliber}</li>
+            <div className="card-list">
+                {items.map((item, index) => (
+                    <Card
+                        key={index}
+                        title={item.nombre} 
+                        description={item.descripcion} 
+                        imageSrc={item.imagen} 
+                    />
                 ))}
-            </ul>
+            </div>
         </div>
     );
+    
 };
 
 export default ItemListContainer;
