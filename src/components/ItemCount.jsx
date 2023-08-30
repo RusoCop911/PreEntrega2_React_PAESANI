@@ -29,7 +29,7 @@ const ItemCount = () => {
                 <button onClick={handleReset}>Reset</button>
             </div>
             <div className='sin-funcion'>
-                <button>Agregar al Carrito (sin funcion)</button>
+                <button>Agregar al Carrito (sin función)</button>
             </div>
         </div>
     );
