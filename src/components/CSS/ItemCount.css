@@ -1,0 +1,16 @@
+.item-count {
+    color: rgb(0, 0, 0);
+    font-weight: bold;
+}
+
+.count-number {
+    padding: 10px;
+}
+
+.reset-button {
+    padding-top: 10px;
+}
+
+.sin-funcion {
+    padding-top: 5px;
+}

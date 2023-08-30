@@ -1,5 +1,5 @@
 import React from 'react';
-import './CartWidget.css';
+import './CSS/CartWidget.css';
 
 const CartWidget = () => {
     const itemCount = 0;
@@ -9,7 +9,7 @@ const CartWidget = () => {
             <div className="cart-icon">
                 🛒
             </div>
-            <div className="item-count">
+            <div className="cart-widget-number">
                 {itemCount}
             </div>
         </div>

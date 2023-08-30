@@ -1,23 +1,27 @@
 import React, { useEffect, useState } from 'react';
-import './ItemListContainer.css';
+import './CSS/ItemListContainer.css';
 import Card from './Card';
+import { useParams } from 'react-router-dom';
 
 const ItemListContainer = ({ title, containerClass, titleClass }) => {
     const [items, setItems] = useState([]);
-
-    const getProducts = async () => {
-        try {
-            const response = await fetch('/data/products.json');
-            const products = await response.json();
-            setItems(products);
-        } catch (error) {
-            console.error('Error fetching products:', error);
-        }
-    };
+    const { id } = useParams()
 
     useEffect(() => {
+        const getProducts = async () => {
+            const response = await fetch("/data/productos.json");
+            const products = await response.json();
+
+            if (id) {
+                const filteredItems = products.filter(item => item.categoria === id);
+                setItems(filteredItems);
+            } else {
+                setItems(products);
+            }
+        };
+
         getProducts();
-    }, []);
+    }, [id]);
 
     return (
         <div className={`item-list-container ${containerClass}`}>
@@ -26,15 +30,15 @@ const ItemListContainer = ({ title, containerClass, titleClass }) => {
                 {items.map((item, index) => (
                     <Card
                         key={index}
-                        title={item.nombre} 
-                        description={item.descripcion} 
-                        imageSrc={item.imagen} 
+                        id={item.id}
+                        title={item.nombre}
+                        description={item.descripcion}
+                        imageSrc={item.imagen}
                     />
                 ))}
             </div>
         </div>
     );
-    
 };
 
 export default ItemListContainer;

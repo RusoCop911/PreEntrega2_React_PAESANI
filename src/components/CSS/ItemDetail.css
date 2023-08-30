@@ -1,0 +1,25 @@
+.detail-image {
+    max-width: 400px; 
+    height: auto; 
+}
+
+.card-item-detail {
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        padding: 16px;
+        margin: 8px;
+        box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+        background-color: white;
+        transition: transform 0.2s ease-in-out;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        text-align: center;
+    }
+    
+.card-item-detail img {
+        max-width: 400px;
+        height: auto;
+        margin-bottom: 10px;
+    }
