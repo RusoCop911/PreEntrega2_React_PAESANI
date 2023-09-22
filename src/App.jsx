@@ -1,7 +1,15 @@
+import React from 'react';
+import { CartProvider } from './context/CartContext';
 import Router from './Router/Router';
+import Cart from './components/Cart'
 
 function App() {
-  return <Router />
+  return (
+    <CartProvider>
+      <Router />
+      <Cart /> 
+    </CartProvider>
+  );
 }
 
-export default App; 
+export default App;

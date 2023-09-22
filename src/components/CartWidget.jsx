@@ -1,19 +1,22 @@
 import React from 'react';
+import { useCart } from '../context/CartContext'; 
 import './CSS/CartWidget.css';
 
 const CartWidget = () => {
-    const itemCount = 0;
+  const { state, dispatch } = useCart();
+  const { totalItems } = state;
 
-    return (
-        <div className="cart-widget">
-            <div className="cart-icon">
-                🛒
-            </div>
-            <div className="cart-widget-number">
-                {itemCount}
-            </div>
-        </div>
-    );
+  const toggleCart = () => {
+    console.log("Botón del carrito clickeado"); 
+    dispatch({ type: 'TOGGLE_CART' }); 
+  };
+  
+  return (
+    <div className="cart-widget">
+      <button onClick={toggleCart} className="cart-icon">🛒</button>
+      <div className="cart-widget-number">{totalItems}</div>
+    </div>
+  );
 };
 
 export default CartWidget;

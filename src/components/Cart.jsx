@@ -4,7 +4,7 @@ class Cart extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            items: props.items,
+            items: props.items || [], 
         };
     }
 
@@ -34,7 +34,7 @@ class Cart extends React.Component {
             <div className="cart">
                 <h2>Carrito de Compras</h2>
                 <ul>
-                    {items.map((item, index) => (
+                    {items && items.map((item, index) => (
                         <li key={index}>
                             {item.title} - ${item.price} x {item.stock}
                             <button onClick={() => this.handleRemoveItem(index)}>Eliminar</button>
