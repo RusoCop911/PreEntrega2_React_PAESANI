@@ -1,28 +1,45 @@
-import { useParams } from "react-router-dom";
-import { useState, useEffect } from "react";
-import ItemDetail from "./ItemDetail";
+import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import { doc, getDoc } from "firebase/firestore";
+import { db } from '../firebase/client';
 
-export default function ItemDetailContainer() {
-    const [detail, setDetail] = useState({});
+const ItemDetailContainer = () => {
     const { id } = useParams();
+    const [product, setProduct] = useState(null);
 
     useEffect(() => {
-        const getProduct = async () => {
-            const response = await fetch(`${process.env.PUBLIC_URL}/data/productos.json`);
-            const products = await response.json();
-
-            if (id) {
-                const filteredProduct = products.find(product => product.id === parseInt(id));
-                setDetail(filteredProduct);
-            } else {
-                setDetail(products);
+        const getProductFromFirebase = async () => {
+            try {
+                const productRef = doc(db, 'productos', id); 
+                const productSnapshot = await getDoc(productRef);
+                if (productSnapshot.exists()) {
+                    const productData = productSnapshot.data();
+                    setProduct(productData);
+                } else {
+                    console.error('El producto no existe en Firebase.');
+                }
+            } catch (error) {
+                console.error('Error al obtener el producto de Firebase:', error);
             }
         };
 
-        getProduct();
+        getProductFromFirebase(); 
     }, [id]);
 
     return (
-        <ItemDetail detail={detail} />
+        <div>
+            {product ? (
+                <div>
+                    <h2>{product.title}</h2>
+                    <p>{product.description}</p>
+                    <p>Precio: {product.price}</p>
+                    <img src={product.image} alt={product.title} />
+                </div>
+            ) : (
+                <p>Cargando información del producto...</p>
+            )}
+        </div>
     );
-}
+};
+
+export default ItemDetailContainer;

@@ -22,3 +22,14 @@
     justify-content: space-around;
     align-items: center;
 }
+
+.loader-icon {
+    font-size: 60px; 
+}
+
+.loader {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}

@@ -1,3 +1,4 @@
+import React from 'react';
 import './CSS/ItemDetail.css';
 import ItemCount from './ItemCount';
 
@@ -8,7 +9,7 @@ export default function ItemDetail({ detail }) {
             <h3>{detail.nombre}</h3>
             <p>Precio: {detail.precio}</p>
             <div>
-                <ItemCount />
+                <ItemCount stock={detail.stock} />
             </div>
         </div>
     );
