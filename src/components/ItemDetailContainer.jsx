@@ -1,12 +1,8 @@
 import React from 'react';
-import { useParams } from 'react-router-dom';
 
-const ItemDetailContainer = ({ products }) => {
-    const { id } = useParams();
-    const product = products.find(item => item.id === id);
-
+const ItemDetailContainer = ({ product }) => {
     return (
-        <div>
+        <div className="item-detail-container">
             {product ? (
                 <div>
                     <h2>{product.title}</h2>
