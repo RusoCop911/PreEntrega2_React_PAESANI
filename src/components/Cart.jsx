@@ -2,6 +2,7 @@ import React from 'react';
 import { useCart } from '../context/CartContext';
 import { Link } from 'react-router-dom';
 import Swal from 'sweetalert2';
+import './CSS/Cart.css';
 
 
 const Cart = () => {
@@ -25,7 +26,7 @@ const Cart = () => {
     };
     
     return (
-        <div>
+        <div className='Carrito'>
             <h2>Carrito de Compras</h2>
             {cart.length === 0 ? (
                 <p>El carrito está vacío.</p>
