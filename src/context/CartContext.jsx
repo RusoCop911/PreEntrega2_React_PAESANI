@@ -1,41 +1,55 @@
-import React, { createContext, useContext, useReducer } from 'react';
+import React, { createContext, useContext, useState } from 'react';
 
-const initialState = {
-  items: [],
-  totalItems: 0,
-  isCartVisible: false,
+const CartContext = createContext();
+
+export const useCart = () => {
+    return useContext(CartContext);
 };
 
-const CartContext = createContext(initialState);
+export const CartProvider = ({ children }) => {
+    const [cart, setCart] = useState([]);
 
-function cartReducer(state, action) {
-  switch (action.type) {
-    case 'ADD_TO_CART':
-      return {
-        ...state,
-        items: [...state.items, action.payload],
-        totalItems: state.totalItems + action.payload.quantity,
-      };
-    case 'TOGGLE_CART':
-      return {
-        ...state,
-        isCartVisible: !state.isCartVisible,
-      };
-    default:
-      return state;
-  }
-}
+    const addToCart = (product, quantity) => {
+        console.log('addToCart called with product ID:', product.id);
+        console.log('Quantity selected:', quantity);
 
-export function CartProvider({ children }) {
-  const [state, dispatch] = useReducer(cartReducer, initialState);
+        const existingItemIndex = cart.findIndex((item) => item.id === product.id);
 
-  return (
-    <CartContext.Provider value={{ state, dispatch }}>
-      {children}
-    </CartContext.Provider>
-  );
-}
+        if (existingItemIndex !== -1) {
+            const updatedCart = [...cart];
+            updatedCart[existingItemIndex].quantity += quantity;
+            setCart(updatedCart);
+        } else {
+            const newItem = {
+                id: product.id,
+                title: product.title,
+                price: product.price,
+                quantity: quantity,
+            };
+            const updatedCart = [...cart, newItem];
+            setCart(updatedCart);
+        }
+    };
 
-export function useCart() {
-  return useContext(CartContext);
-}
+    const removeFromCart = (productId) => {
+        const updatedCart = cart.filter((item) => item.id !== productId);
+        setCart(updatedCart);
+    };
+
+    const clearCart = () => {
+        setCart([]);
+    };
+
+    return (
+        <CartContext.Provider
+            value={{
+                cart,
+                addToCart,
+                removeFromCart,
+                clearCart,
+            }}
+        >
+            {children}
+        </CartContext.Provider>
+    );
+};

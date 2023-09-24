@@ -12,7 +12,7 @@
     align-items: center;
     text-align: center;
     width: 300px;
-    height: 550px;
+    height: 600px;
 }
 
 .card img {
@@ -25,12 +25,13 @@
     transform: translateY(-5px);
 }
 
-.card-link a {
+.button {
     color: black;
+    font-weight: bold;
     transition: 0.2s;
 }
 
-.card-link a:hover {
+.button:hover {
     color: rgb(253, 24, 24);
     font-weight: bold;
 }

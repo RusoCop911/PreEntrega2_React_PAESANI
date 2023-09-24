@@ -1,8 +1,11 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './CSS/ItemCount.css';
+import { useCart } from '../context/CartContext';
+import Swal from 'sweetalert2';
 
-const ItemCount = ({ stock, addToCart }) => { 
-    const [count, setCount] = useState(1); 
+const ItemCount = ({ stock, product }) => {
+    const { addToCart } = useCart();
+    const [count, setCount] = React.useState(1);
 
     const handleIncrement = () => {
         if (count < stock) {
@@ -17,8 +20,18 @@ const ItemCount = ({ stock, addToCart }) => {
     };
 
     const handleAddToCart = () => {
-        addToCart(count); 
-    }
+        console.log('ID del producto:', product.id);
+        addToCart(product, count);
+        console.log('Producto agregado al carrito:', product, 'Cantidad:', count);
+        Swal.fire({
+            position: 'top-end',
+            icon: 'success',
+            title: 'Agregado al Carrito!',
+            showConfirmButton: false,
+            timer: 1500
+        })
+    };
+
 
     return (
         <div>
@@ -27,7 +40,7 @@ const ItemCount = ({ stock, addToCart }) => {
                 <span className="count-number">{count}</span>
                 <button onClick={handleIncrement}>+</button>
             </div>
-            <div className='sin-funcion'>
+            <div>
                 <button onClick={handleAddToCart}>Agregar al Carrito</button>
             </div>
         </div>

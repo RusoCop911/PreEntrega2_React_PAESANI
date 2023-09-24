@@ -1,22 +1,24 @@
 import React from 'react';
-import { useCart } from '../context/CartContext'; 
 import './CSS/CartWidget.css';
+import { Link, useLocation } from 'react-router-dom';
+import { useCart } from '../context/CartContext'; 
 
 const CartWidget = () => {
-  const { state, dispatch } = useCart();
-  const { totalItems } = state;
+    const { cart } = useCart();
+    const totalItems = cart.reduce((total, item) => total + item.quantity, 0);
+    const location = useLocation();
+    const isCheckoutPage = location.pathname === '/checkout';
+    
+    if (isCheckoutPage) {
+        return null;
+    }
 
-  const toggleCart = () => {
-    console.log("Botón del carrito clickeado"); 
-    dispatch({ type: 'TOGGLE_CART' }); 
-  };
-  
-  return (
-    <div className="cart-widget">
-      <button onClick={toggleCart} className="cart-icon">🛒</button>
-      <div className="cart-widget-number">{totalItems}</div>
-    </div>
-  );
+    return (
+        <div className="cart-widget">
+            <Link to="/cart" className="cart-icon">🛒</Link>
+            {totalItems > 0 && <div className="cart-widget-number">{totalItems}</div>}
+        </div>
+    );
 };
 
 export default CartWidget;

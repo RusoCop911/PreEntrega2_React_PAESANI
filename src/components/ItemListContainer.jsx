@@ -47,20 +47,20 @@ const ItemListContainer = () => {
                     <p>Cargando...</p>
                 </div>
             ) : (
-                <div>
+                <div className='tarjetas'>
                     {products.map(product => (
-                        <Card
-                            key={product.id}
-                            id={product.id}
-                            title={product.title}
-                            description={product.description}
-                            imageSrc={product.image}
-                            price={product.price}
-                            stock={product.stock}
-                        />
+                        <div key={product.id}>
+                                <Card
+                                    id={product.id}
+                                    title={product.title}
+                                    imageSrc={product.image}
+                                    price={product.price}
+                                    stock={product.stock}
+                                    product={product}
+                                />
+                        </div>
                     ))}
                 </div>
-
             )}
         </div>
     );

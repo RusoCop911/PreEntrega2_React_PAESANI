@@ -1,5 +1,5 @@
 .item-list-container2 {
-    background-color: #f8f9fa;
+    background-color: #646667;
     padding: 20px;
     border-radius: 10px;
     display: flex;
@@ -26,12 +26,20 @@
 }
 
 .loader-icon {
+    color: aliceblue;
     font-size: 60px; 
 }
 
 .loader {
+    color: aliceblue;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+}
+
+.tarjetas {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
 }

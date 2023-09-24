@@ -1,57 +1,52 @@
 import React from 'react';
+import { useCart } from '../context/CartContext';
+import { Link } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
-class Cart extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            items: props.items || [], 
-        };
-    }
 
-    handleRemoveItem = (index) => {
-        const { items } = this.state;
-        items.splice(index, 1);
-        this.setState({ items });
+const Cart = () => {
+    const { cart, removeFromCart, clearCart } = useCart();
+
+    const calculateTotalPrice = () => {
+        let total = 0;
+        cart.forEach((item) => {
+            total += item.price * item.quantity; // Multiplica el precio por la cantidad
+        });
+        return total.toFixed(2); 
     };
 
-    handleChangeStock = (index, newStock) => {
-        const { items } = this.state;
-        if (newStock >= 0) {
-            items[index].stock = newStock;
-            this.setState({ items });
-        }
+    const handleCheckout = () => {
+        clearCart();
+        Swal.fire({
+            icon: 'success',
+            title: 'Compra realizada con Exito!',
+            text: '¡Gracias por tu compra!',
+        });
     };
-
-    calculateTotal() {
-        const { items } = this.state;
-        return items.reduce((total, item) => total + item.price * item.stock, 0);
-    }
-
-    render() {
-        const { items } = this.state;
-
-        return (
-            <div className="cart">
-                <h2>Carrito de Compras</h2>
-                <ul>
-                    {items && items.map((item, index) => (
-                        <li key={index}>
-                            {item.title} - ${item.price} x {item.stock}
-                            <button onClick={() => this.handleRemoveItem(index)}>Eliminar</button>
-                            <input
-                                type="number"
-                                value={item.stock}
-                                onChange={(e) => this.handleChangeStock(index, parseInt(e.target.value))}
-                            />
-                        </li>
-                    ))}
-                </ul>
+    
+    return (
+        <div>
+            <h2>Carrito de Compras</h2>
+            {cart.length === 0 ? (
+                <p>El carrito está vacío.</p>
+            ) : (
                 <div>
-                    <strong>Total: ${this.calculateTotal()}</strong>
+                    <ul>
+                        {cart.map((item) => (
+                            <li key={item.id}>
+                                {item.title} - ${item.price} x {item.quantity}
+                                <button onClick={() => removeFromCart(item.id)}>Eliminar</button>
+                            </li>
+                        ))}
+                    </ul>
+                    <p>Total: ${calculateTotalPrice()}</p>
+                    <Link to="/checkout">
+                        <button onClick={handleCheckout}>Comprar</button>
+                    </Link>
                 </div>
-            </div>
-        );
-    }
-}
+            )}
+        </div>
+    );
+};
 
 export default Cart;
